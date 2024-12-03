@@ -1,0 +1,84 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+// دالة لتحميل النص من المستخدم بحجم محدد
+char *ChargerChaine(int N) {
+    char *chaine = (char *)malloc(N + 1);
+    if (chaine == NULL) { // التحقق من نجاح تخصيص الذاكرة
+        printf("خطأ: الذاكرة غير كافية.\n");
+        return NULL;
+    }
+    printf("الرجاء إدخال النص:\n");
+    fgets(chaine, N + 1, stdin); // قراءة النص من المستخدم
+    chaine[strcspn(chaine, "\n")] = '\0'; // حذف المحرف '\n' إذا كان موجودًا
+    return chaine;
+}
+
+// دالة لحساب طول النص
+int Longueur(char *ch) {
+    return strlen(ch);
+}
+
+// دالة لتحميل النص في جدول (مصفوفة)
+void ChargerTab(char *p, char Tab[]) {
+    strcpy(Tab, p);
+}
+
+// دالة لعكس محتويات الجدول في جدول آخر
+void InverserTab(char Tab[], char T[], int m) {
+    for (int i = 0; i < m; i++) {
+        T[i] = Tab[m - i - 1];
+    }
+    T[m] = '\0'; // التأكد من أن الجدول الناتج يحتوي على '\0' في النهاية
+}
+
+// دالة لعرض محتويات الجدول
+void AfficherTab(char Tab[], int m) {
+    for (int i = 0; i < m; i++) {
+        printf("%c", Tab[i]);
+    }
+    printf("\n"); // إضافة سطر جديد بعد الطباعة
+}
+
+int main() {
+    int n;
+    printf("الرجاء إدخال الحجم الأقصى للنص:\n");
+    if (scanf("%d", &n) != 1 || n <= 0) { // التحقق من صحة الإدخال
+        printf("خطأ: الحجم المدخل غير صحيح.\n");
+        return 1; // إنهاء البرنامج مع إرجاع خطأ
+    }
+    getchar(); // تفريغ الـ buffer بعد scanf
+
+    // تحميل النص
+    char *ch = ChargerChaine(n);
+    if (ch == NULL) {
+        return 1; // إنهاء البرنامج إذا فشل تخصيص الذاكرة
+    }
+
+    int m = Longueur(ch); // حساب طول النص
+
+    // تخصيص الذاكرة للجدولين
+    char *Tab = (char *)malloc((m + 1) * sizeof(char));
+    char *T = (char *)malloc((m + 1) * sizeof(char));
+    if (Tab == NULL || T == NULL) { // التحقق من تخصيص الذاكرة
+        printf("خطأ: الذاكرة غير كافية.\n");
+        free(ch); // تحرير الذاكرة التي تم تخصيصها مسبقًا
+        return 1; // إنهاء البرنامج مع إرجاع خطأ
+    }
+
+    ChargerTab(ch, Tab); // تحميل النص في الجدول
+    printf("النص الأصلي:\n");
+    AfficherTab(Tab, m); // عرض النص الأصلي
+
+    InverserTab(Tab, T, m); // عكس النص
+    printf("النص المقلوب:\n");
+    AfficherTab(T, m); // عرض النص المقلوب
+
+    // تحرير الذاكرة المخصصة
+    free(ch);
+    free(Tab);
+    free(T);
+
+    return 0; // إنهاء البرنامج بنجاح
+}
