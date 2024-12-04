@@ -1,55 +1,46 @@
 #include <stdio.h>
 int main() {
-    int matrix[5][5]; // تعريف مصفوفة بحجم 5x5
-
-    // طلب القيم من المستخدم لملء المصفوفة
-    printf("أدخل 25 قيمة لملء المصفوفة 5x5:\n");
+    int matrix[5][5]; 
+    printf("Entrez les valeurs de Matrice 5*5:\n");
     for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
-            printf("أدخل القيمة للموقع [%d][%d]: ", i, j);
+            printf(" Entrez une valeur [%d][%d]: ", i, j);
             scanf("%d", &matrix[i][j]);
         }
-    }
-    printf("\nجميع القيم في المصفوفة:\n");
+    printf("\n Tous les valeurs :\n");
     for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
             printf("%d\t", matrix[i][j]);
         }
         printf("\n");
     }
-
-    // طباعة القيم إذا كان i زوجيًا
-    printf("\nالقيم حيث i زوجي:\n");
+    printf("\n i pair :\n");
     for (int i = 0; i < 5; i++) {
-        if (i % 2 == 0) { // تحقق إذا كان i زوجيًا
+        if (i % 2 == 0) { 
             for (int j = 0; j < 5; j++) {
                 printf("%d\t", matrix[i][j]);
             }
             printf("\n");
         }
     }
-    // طباعة القيم إذا كان i فرديًا
-    printf("\nالقيم حيث i فردي:\n");
+    printf("\n i impair :\n");
     for (int i = 0; i < 5; i++) {
-        if (i % 2 != 0) { // تحقق إذا كان i فرديًا
+        if (i % 2 != 0) {
             for (int j = 0; j < 5; j++) {
                 printf("%d\t", matrix[i][j]);
             }
             printf("\n");
         }
     }
-    // طباعة القيم في القطر الرئيسي (عندما i == j)
-    printf("\nالقيم على القطر الرئيسي:\n");
+    printf("\n Valeurs de Diagonalle Principale:\n");
     for (int i = 0; i < 5; i++) {
         printf("%d\t", matrix[i][i]);
     }
     printf("\n");
-
-    // طباعة القيم في القطر الثانوي (عندما i + j == 4)
-    printf("\nالقيم على القطر الثانوي:\n");
+    printf("\n Valeurs de Diagonale Secondaire:\n");
     for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
-            if (i + j == 4) { // تحقق إذا كان i + j == 4
+            if (i + j == 4) { 
                 printf("%d\t", matrix[i][j]);
             }
         }
