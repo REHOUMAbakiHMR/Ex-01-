@@ -72,7 +72,6 @@ int main() {
     afficherListe(L1);
 
     element* L2 = ajouterEnDebut(L1, 40);
-    afficherListe(L2);
 
     viderListe(L2);
 
